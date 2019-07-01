@@ -1,0 +1,23 @@
+{
+  "name": "algo-meter",
+  "version": "1.0.0",
+  "description": "Basic algorithm tester for learning exercises",
+  "main": "algoMeter.js",
+  "dependencies": {
+    "benchmark": "^2.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node algoMeter.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterjcole/algo-meter.git"
+  },
+  "author": "Peter Cole",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peterjcole/algo-meter/issues"
+  },
+  "homepage": "https://github.com/peterjcole/algo-meter#readme"
+}
