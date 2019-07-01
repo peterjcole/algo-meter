@@ -6,9 +6,12 @@
   "dependencies": {
     "benchmark": "^2.1.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jasmine": "^3.4.0",
+    "rewire": "^4.0.1"
+  },
   "scripts": {
-    "test": "node algoMeter.js"
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
