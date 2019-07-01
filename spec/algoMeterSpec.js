@@ -5,7 +5,8 @@ const generateSizesArr = algoMeterRewire.__get__('generateSizesArr')
 const createArrs = algoMeterRewire.__get__('createArrs')
 const generateRandomArr = algoMeterRewire.__get__('generateRandomArr')
 const generateRandomString = algoMeterRewire.__get__('generateRandomString')
-
+const executionTime = algoMeterRewire.__get__('executionTime')
+const arrMean = algoMeterRewire.__get__('arrMean')
 
 
 
@@ -34,11 +35,11 @@ describe('algoMeter', function() {
         expect(Array.isArray(arr)).toBe(true)
       })
     })
-    // it('creates arrays of the length of each array in the expected sizes arr',function() {
-    //   createArrs(expectedSizesArr).forEach(function(arr, index){
-    //     expect(arr.length).toEqual(expectedSizesArr[index])
-    //   })
-    // })
+    it('creates arrays of the length of each array in the expected sizes arr',function() {
+      createArrs(expectedSizesArr).forEach(function(arr, index){
+        expect(arr.length).toEqual(expectedSizesArr[index])
+      })
+    })
   })
 
   describe('#generateRandomArr', function() {
@@ -62,6 +63,29 @@ describe('algoMeter', function() {
   describe ('#generateRandomString', function() {
     it ('creates a string', function() {
       expect(typeof(generateRandomString())).toEqual('string')
+    })
+  })
+
+  describe ('#executionTime', function() {
+    it ('returns a number', function() {
+      const testArray = ["21213a", "eaewjkb32kj", "fajklbw", "jglewj3198"]
+      result = executionTime('sort', testArray)
+      console.log(result)
+      expect(typeof(result)).toEqual("number")
+    })
+  })
+
+  describe ('#arrMean', function() {
+    const meanTestArray = [1.2, 2.6, 2.1, 3.9]
+
+    it ('returns a number', function() {
+      result = arrMean(meanTestArray)
+      expect(typeof(result)).toEqual("number")
+    })
+
+    it ('returns the correct mean', function() {
+      result = arrMean(meanTestArray)
+      expect(result).toEqual(2.45)
     })
   })
 })

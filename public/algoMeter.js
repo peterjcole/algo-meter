@@ -1,10 +1,10 @@
+const { performance } = require('perf_hooks')
 
 runAlgoMeter() 
 
 
 function runAlgoMeter() {
-  arrs = createArrs(generateSizesArr());
-  console.log(arrs)
+  arrs = createArrs(generateSizesArr());  
 }
 
 function generateSizesArr() {
@@ -40,6 +40,25 @@ function generateRandomString() {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
+}
+
+function executionTime(fn, obj){
+  results = []
+  for(let i = 0; i < 10; i++) {
+    var t0 = performance.now();
+    obj[fn]() 
+    var t1 = performance.now();
+    console.log("Call took " + (t1 - t0) + " milliseconds.")
+    results.push(t1 - t0)
+  }
+  return arrMean(results)
+}
+
+function arrMean(arr) {
+  sum = arr.reduce(function(accumulator, currentValue) {
+    return accumulator + currentValue
+  }, 0)
+  return (sum / arr.length)
 }
 
 module.exports = { runAlgoMeter }
