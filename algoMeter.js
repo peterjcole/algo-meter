@@ -3,13 +3,12 @@ const { performance } = require('perf_hooks')
 function runAlgoMeter(fn) {
   const arrs = createArrs(generateSizesArr());  
   const results = executeTests(arrs, fn);
-  // const results = executeTestsForSizes(generateSizesArr(), fn)
   return results
 }
 
 function generateSizesArr() {
   let generatedSizesArr = []
-  for(let i = 5000; i <= 100000; i += 5000) {
+  for(let i = 5000; i <= 210000; i += 5000) {
     generatedSizesArr.push(i)
   }
   return generatedSizesArr
@@ -32,7 +31,7 @@ function generateRandomArr(length) {
 }
 
 function generateRandomString() {
-  var length = Math.floor(Math.random() * 10);
+  var length = 10
   var result           = '';
   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var charactersLength = characters.length;
@@ -48,12 +47,6 @@ function executionTime(fn, obj){
     var t0 = performance.now();
     obj[fn]() 
     var t1 = performance.now();
-    if (obj.length == 95000) {
-      console.log("95000 Call took " + (t1 - t0) + " milliseconds.")
-    }
-    if (obj.length == 100000) {
-      console.log("100000 Call took " + (t1 - t0) + " milliseconds.")
-    }
     results.push(t1 - t0)
   }
   return arrMean(results)
@@ -71,19 +64,8 @@ function executeTests(arrs, fn) {
   arrs.forEach(function(arr){
     results.push({x: arr.length, y: executionTime(fn, arr)})
   })
-  return results
+  results 
+  return results.slice(0, (results.length - 2))
 }
-
-// function executeTestsForSizes(sizeArr, fn) {
-//   let finalResult = []
-//   sizeArr.forEach(function(size){
-//     let results = []
-//     for(let i = 0; i < 10; i++) {
-//       results.push(executionTime(fn, generateRandomArr(size)))
-//     }
-//     finalResult.push({x: size, y: arrMean(results)})
-//   })
-//   return finalResult
-// }
 
 module.exports = { runAlgoMeter }

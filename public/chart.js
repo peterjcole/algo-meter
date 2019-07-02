@@ -19,7 +19,6 @@ function getData() {
 }
 
 function getDataWithSpecificFn(fn) {
-  console.log(fn)
   $.get(`/run/function/${fn}`, function(data) {
     $('.js-current-count').text(data.count);
   }).done(function(result){
@@ -59,7 +58,7 @@ function renderChart(result, fn) {
               //   stepSize: 5000
               // }
           }],
-          yAxes: [{
+           yAxes: [{
             scaleLabel: { 
               display: true,
               labelString: 'Mean time to execute (ms)' 
