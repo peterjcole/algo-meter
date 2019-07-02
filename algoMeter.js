@@ -1,23 +1,9 @@
 const { performance } = require('perf_hooks')
-const express = require("express");
-const app = express();
-app.use(express.static('public'));
-app.get("/run", function(request, response) {
-  console.log(request.yourFieldName); 
-  response.json(runAlgoMeter('sort'));
-});
-app.get("/run/function/:function", function(request, response) {
-  console.log(request.yourFieldName); 
-  response.json(runAlgoMeter(request.params['function']))
-});
-app.listen(process.env.PORT || 8080, () => console.log(
-  `Your app is listening on port ${process.env.PORT || 8080}`));
-
-// runAlgoMeter('sort') 
 
 function runAlgoMeter(fn) {
   const arrs = createArrs(generateSizesArr());  
   const results = executeTests(arrs, fn);
+  // const results = executeTestsForSizes(generateSizesArr(), fn)
   return results
 }
 
@@ -62,7 +48,12 @@ function executionTime(fn, obj){
     var t0 = performance.now();
     obj[fn]() 
     var t1 = performance.now();
-    // console.log("Call took " + (t1 - t0) + " milliseconds.")
+    if (obj.length == 95000) {
+      console.log("95000 Call took " + (t1 - t0) + " milliseconds.")
+    }
+    if (obj.length == 100000) {
+      console.log("100000 Call took " + (t1 - t0) + " milliseconds.")
+    }
     results.push(t1 - t0)
   }
   return arrMean(results)
@@ -82,4 +73,17 @@ function executeTests(arrs, fn) {
   })
   return results
 }
+
+// function executeTestsForSizes(sizeArr, fn) {
+//   let finalResult = []
+//   sizeArr.forEach(function(size){
+//     let results = []
+//     for(let i = 0; i < 10; i++) {
+//       results.push(executionTime(fn, generateRandomArr(size)))
+//     }
+//     finalResult.push({x: size, y: arrMean(results)})
+//   })
+//   return finalResult
+// }
+
 module.exports = { runAlgoMeter }

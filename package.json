@@ -2,7 +2,7 @@
   "name": "algo-meter",
   "version": "1.0.0",
   "description": "Basic algorithm tester for learning exercises",
-  "main": "algoMeter.js",
+  "main": "app.js",
   "dependencies": {
     "benchmark": "^2.1.4",
     "body-parser": "^1.19.0",
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "node algoMeter.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

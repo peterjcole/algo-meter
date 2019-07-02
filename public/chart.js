@@ -1,5 +1,9 @@
 let chart = null
 
+$(document).ready(function() {
+  // getData();
+})
+
 $('#run').click(function(){
   getDataWithSpecificFn($('#function').val())
 })
@@ -10,7 +14,7 @@ function getData() {
   }).done(function(result){
     console.log(result)
     $('.myChart').empty()
-    renderChart(result)
+    renderChart(result, "sort")
   })
 }
 
@@ -21,12 +25,12 @@ function getDataWithSpecificFn(fn) {
   }).done(function(result){
     console.log(result)
     $('.myChart').empty()
-    renderChart(result)
+    renderChart(result, fn)
   })
 }
 
 
-function renderChart(result) {
+function renderChart(result, fn) {
   $('#myChart').remove(); // this is my <canvas> element
   $('#charts').append('<canvas id="myChart"><canvas>');
   var ctx = document.getElementById('myChart').getContext('2d');
@@ -35,7 +39,7 @@ function renderChart(result) {
       type: 'scatter',
       data: {
         datasets: [{
-          label: 'Performance',
+          label: `Performance of '${fn}'`,
           backgroundColor: '#dc906b',
           data: result
         }]

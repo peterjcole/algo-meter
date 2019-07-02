@@ -1,6 +1,5 @@
-const { runAlgoMeter }= require('../algoMeter.js/index.js')
 const rewire = require('rewire')
-const algoMeterRewire = rewire('../public/algoMeter.js')
+const algoMeterRewire = rewire('../algoMeter.js')
 const generateSizesArr = algoMeterRewire.__get__('generateSizesArr')
 const createArrs = algoMeterRewire.__get__('createArrs')
 const generateRandomArr = algoMeterRewire.__get__('generateRandomArr')
@@ -8,9 +7,6 @@ const generateRandomString = algoMeterRewire.__get__('generateRandomString')
 const executionTime = algoMeterRewire.__get__('executionTime')
 const arrMean = algoMeterRewire.__get__('arrMean')
 const executeTests = algoMeterRewire.__get__('executeTests')
-const { performance } = require('perf_hooks')
-
-
 
 
 describe('algoMeter', function() {
