@@ -8,6 +8,7 @@ const generateRandomString = algoMeterRewire.__get__('generateRandomString')
 const executionTime = algoMeterRewire.__get__('executionTime')
 const arrMean = algoMeterRewire.__get__('arrMean')
 const executeTests = algoMeterRewire.__get__('executeTests')
+const { performance } = require('perf_hooks')
 
 
 
@@ -117,20 +118,26 @@ describe('algoMeter', function() {
   })
 
   describe ('#executeTests', function() {
-    it('returns an array of arrays', function() {
-      executeTests(testArray, "sort").forEach(function(arr) {
-        expect(Array.isArray(arr)).toBe(true)
+    it('returns an array of objects', function() {
+      executeTests(testArray, "sort").forEach(function(obj) {
+        expect(typeof(obj)).toEqual('object')
       })
     })
-    it('returns an array of the correct number of arrays', function() {
+    it('returns objects containing an x and y property with number values', function(){
+      executeTests(testArray, "sort").forEach(function(obj) {
+        expect(typeof(obj.x)).toBe('number')
+        expect(typeof(obj.y)).toBe('number')
+      })
+    })
+    it('returns an array of the correct number of objects', function() {
       result = executeTests(testArray, "sort")
       expect(result.length).toEqual(3)
     })
-    it('returns arrays with the first number equal to the number of items in the test array', function() {
+    it('returns arrays with the x value equal to the number of items in the test array', function() {
       result = executeTests(testArray, "sort")
-      expect(result[0][0]).toEqual(5)
-      expect(result[1][0]).toEqual(10)
-      expect(result[2][0]).toEqual(15)
+      expect(result[0].x).toEqual(5)
+      expect(result[1].x).toEqual(10)
+      expect(result[2].x).toEqual(15)
     })
   })
 })

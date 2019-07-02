@@ -1,4 +1,3 @@
-const { performance } = require('perf_hooks')
 
 runAlgoMeter('sort') 
 
@@ -65,7 +64,7 @@ function arrMean(arr) {
 function executeTests(arrs, fn) {
   let results = []
   arrs.forEach(function(arr){
-    results.push([arr.length, executionTime(fn, arr)])
+    results.push({x: arr.length, y: executionTime(fn, arr)})
   })
   return results
 }
