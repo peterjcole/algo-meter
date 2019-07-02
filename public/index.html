@@ -8,9 +8,17 @@
     <link rel="stylesheet" href="">
   </head>
   <body>
-    <canvas id="myChart"></canvas>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="./chart.js"></script>
-    <!-- <script src="./algoMeter.js"></script> -->
+    <div>    
+      <input id="function" type="text">
+      <button id="run" type="button">Run</button>
+    </div>
+    <div id='charts'>
+        <canvas id="myChart"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+        integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+        crossorigin="anonymous"></script>
+        <script src="./chart.js"></script>
+    </div>
   </body>
 </html>

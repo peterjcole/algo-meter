@@ -1,4 +1,4 @@
-const { runAlgoMeter }= require('../public/algoMeter.js')
+const { runAlgoMeter }= require('../algoMeter.js/index.js')
 const rewire = require('rewire')
 const algoMeterRewire = rewire('../public/algoMeter.js')
 const generateSizesArr = algoMeterRewire.__get__('generateSizesArr')

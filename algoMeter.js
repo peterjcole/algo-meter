@@ -1,10 +1,24 @@
+const { performance } = require('perf_hooks')
+const express = require("express");
+const app = express();
+app.use(express.static('public'));
+app.get("/run", function(request, response) {
+  console.log(request.yourFieldName); 
+  response.json(runAlgoMeter('sort'));
+});
+app.get("/run/function/:function", function(request, response) {
+  console.log(request.yourFieldName); 
+  response.json(runAlgoMeter(request.params['function']))
+});
+app.listen(process.env.PORT || 8080, () => console.log(
+  `Your app is listening on port ${process.env.PORT || 8080}`));
 
-runAlgoMeter('sort') 
+// runAlgoMeter('sort') 
 
 function runAlgoMeter(fn) {
   const arrs = createArrs(generateSizesArr());  
   const results = executeTests(arrs, fn);
-  console.log(results)
+  return results
 }
 
 function generateSizesArr() {

@@ -5,14 +5,17 @@
   "main": "algoMeter.js",
   "dependencies": {
     "benchmark": "^2.1.4",
-    "chart.js": "^2.8.0"
+    "body-parser": "^1.19.0",
+    "chart.js": "^2.8.0",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "jest": "^24.8.0",
     "rewire": "^4.0.1"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node algoMeter.js"
   },
   "repository": {
     "type": "git",
