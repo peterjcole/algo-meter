@@ -1,14 +1,17 @@
 const { performance } = require('perf_hooks')
 
 function runAlgoMeter(fn) {
-  const arrs = createArrs(generateSizesArr());  
+//   const arrs = createArrs(generateSizesArr(5000, 210000, 5000));  
+  const arrs = createArrs(generateSizesArr(10000, 320000, 10000));  
+
   const results = executeTests(arrs, fn);
-  return results
+  return results.slice(0, (results.length - 2))
+
 }
 
-function generateSizesArr() {
+function generateSizesArr(start, end, step) {
   let generatedSizesArr = []
-  for(let i = 5000; i <= 210000; i += 5000) {
+  for(let i = start; i <= end; i += step) {
     generatedSizesArr.push(i)
   }
   return generatedSizesArr
@@ -43,13 +46,13 @@ function generateRandomString() {
 
 function executionTime(fn, obj){
   let results = []
-  for(let i = 0; i < 10; i++) {
+  for(let i = 0; i < 30; i++) {
     var t0 = performance.now();
     obj[fn]() 
     var t1 = performance.now();
     results.push(t1 - t0)
   }
-  return arrMean(results)
+  return arrMedian(results)
 }
 
 function arrMean(arr) {
@@ -59,13 +62,25 @@ function arrMean(arr) {
   return (sum / arr.length)
 }
 
+function arrMedian(arr) {
+  var half = Math.floor(arr.length / 2);
+  
+  arr.sort(function(a, b) { return a - b;});
+  
+  if (arr.length % 2) {
+    return arr[half];
+  } else {
+    return (arr[half-1] + arr[half]) / 2.0;
+  }
+
+}
+
 function executeTests(arrs, fn) {
   let results = []
   arrs.forEach(function(arr){
     results.push({x: arr.length, y: executionTime(fn, arr)})
   })
-  results 
-  return results.slice(0, (results.length - 2))
+  return results 
 }
 
 module.exports = { runAlgoMeter }

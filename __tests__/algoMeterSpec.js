@@ -18,7 +18,7 @@ describe('algoMeter', function() {
      50000,  55000,  60000,
      65000,  70000,  75000,
      80000,  85000,  90000,
-     95000, 100000
+     95000, 100000, 
    ]
 
    const testArray = [
@@ -49,7 +49,7 @@ describe('algoMeter', function() {
 
   describe('#generateSizesArr', function() {
     it('returns expected array', function() {
-      expect(generateSizesArr()).toEqual(expectedSizesArr)
+      expect(generateSizesArr(5000, 100000, 5000)).toEqual(expectedSizesArr)
     })
   })
 
@@ -94,7 +94,6 @@ describe('algoMeter', function() {
     it ('returns a number', function() {
       const testArray = ["21213a", "eaewjkb32kj", "fajklbw", "jglewj3198"]
       result = executionTime('sort', testArray)
-      console.log(result)
       expect(typeof(result)).toEqual("number")
     })
   })

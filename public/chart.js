@@ -1,7 +1,7 @@
 let chart = null
 
 $(document).ready(function() {
-  // getData();
+  getData();
 })
 
 $('#run').click(function(){
@@ -35,12 +35,14 @@ function renderChart(result, fn) {
   var ctx = document.getElementById('myChart').getContext('2d');
   var chart = new Chart(ctx, {
       // The type of chart we want to create
-      type: 'scatter',
+      type: 'line',
       data: {
         datasets: [{
           label: `Performance of '${fn}'`,
           backgroundColor: '#dc906b',
-          data: result
+          data: result,
+          fill: false,
+          lineTension: 0.4
         }]
       },
 
