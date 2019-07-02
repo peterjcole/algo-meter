@@ -1,15 +1,15 @@
 const { performance } = require('perf_hooks')
 
-runAlgoMeter() 
+runAlgoMeter('sort') 
 
-
-function runAlgoMeter() {
-  arrs = createArrs(generateSizesArr());  
-  results = executeArrs(arrs);
+function runAlgoMeter(fn) {
+  const arrs = createArrs(generateSizesArr());  
+  const results = executeTests(arrs, fn);
+  console.log(results)
 }
 
 function generateSizesArr() {
-  generatedSizesArr = []
+  let generatedSizesArr = []
   for(let i = 5000; i <= 100000; i += 5000) {
     generatedSizesArr.push(i)
   }
@@ -17,7 +17,7 @@ function generateSizesArr() {
 }
 
 function createArrs(sizesArr) {
-  createdArr = []
+  let createdArr = []
   sizesArr.forEach(function(num) {
     createdArr.push(generateRandomArr(num))
   })
@@ -25,7 +25,7 @@ function createArrs(sizesArr) {
 }
 
 function generateRandomArr(length) {
-  randomArr = []
+  let randomArr = []
   for(let i = 0; i < length; i++) {
     randomArr.push(generateRandomString())
   }
@@ -44,22 +44,29 @@ function generateRandomString() {
 }
 
 function executionTime(fn, obj){
-  results = []
+  let results = []
   for(let i = 0; i < 10; i++) {
     var t0 = performance.now();
     obj[fn]() 
     var t1 = performance.now();
-    console.log("Call took " + (t1 - t0) + " milliseconds.")
+    // console.log("Call took " + (t1 - t0) + " milliseconds.")
     results.push(t1 - t0)
   }
   return arrMean(results)
 }
 
 function arrMean(arr) {
-  sum = arr.reduce(function(accumulator, currentValue) {
+  let sum = arr.reduce(function(accumulator, currentValue) {
     return accumulator + currentValue
   }, 0)
   return (sum / arr.length)
 }
 
+function executeTests(arrs, fn) {
+  let results = []
+  arrs.forEach(function(arr){
+    results.push([arr.length, executionTime(fn, arr)])
+  })
+  return results
+}
 module.exports = { runAlgoMeter }

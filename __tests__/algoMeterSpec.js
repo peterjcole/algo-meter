@@ -7,7 +7,7 @@ const generateRandomArr = algoMeterRewire.__get__('generateRandomArr')
 const generateRandomString = algoMeterRewire.__get__('generateRandomString')
 const executionTime = algoMeterRewire.__get__('executionTime')
 const arrMean = algoMeterRewire.__get__('arrMean')
-const executeArrs = algoMeterRewire.__get__('executeArrs')
+const executeTests = algoMeterRewire.__get__('executeTests')
 
 
 
@@ -24,6 +24,31 @@ describe('algoMeter', function() {
      95000, 100000
    ]
 
+   const testArray = [
+    [ 'lG0dwypV4', '', 'E', 'UhsTi', 'RN' ],
+    [
+      'pam',
+      'kgPZaUv',
+      'tesH2hkbq',
+      'zDAv',
+      'EEkYSmPvX',
+      'O',
+      'd',
+      'SHpZnGQi',
+      '1',
+      'W8TamO'
+    ],
+    [
+            'Rex',        'Iz',
+       'ikWtHvU2',       'uod',
+            'D41',      '4HxM',
+         'tOyxvy', 'Dh0es5Ivk',
+      '9QnWrKLJk',   'FDOItXG',
+        'PqCL1Ix',  'anQc1B4U',
+          'FrOnE',        '7D',
+               ''
+    ]
+  ]
 
   describe('#generateSizesArr', function() {
     it('returns expected array', function() {
@@ -91,5 +116,21 @@ describe('algoMeter', function() {
     })
   })
 
-  describe ('#executeArrs', function() {})
+  describe ('#executeTests', function() {
+    it('returns an array of arrays', function() {
+      executeTests(testArray, "sort").forEach(function(arr) {
+        expect(Array.isArray(arr)).toBe(true)
+      })
+    })
+    it('returns an array of the correct number of arrays', function() {
+      result = executeTests(testArray, "sort")
+      expect(result.length).toEqual(3)
+    })
+    it('returns arrays with the first number equal to the number of items in the test array', function() {
+      result = executeTests(testArray, "sort")
+      expect(result[0][0]).toEqual(5)
+      expect(result[1][0]).toEqual(10)
+      expect(result[2][0]).toEqual(15)
+    })
+  })
 })
