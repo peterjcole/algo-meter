@@ -7,6 +7,8 @@ const generateRandomArr = algoMeterRewire.__get__('generateRandomArr')
 const generateRandomString = algoMeterRewire.__get__('generateRandomString')
 const executionTime = algoMeterRewire.__get__('executionTime')
 const arrMean = algoMeterRewire.__get__('arrMean')
+const executeArrs = algoMeterRewire.__get__('executeArrs')
+
 
 
 
@@ -88,4 +90,6 @@ describe('algoMeter', function() {
       expect(result).toEqual(2.45)
     })
   })
+
+  describe ('#executeArrs', function() {})
 })

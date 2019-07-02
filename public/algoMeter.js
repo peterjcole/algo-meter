@@ -5,6 +5,7 @@ runAlgoMeter()
 
 function runAlgoMeter() {
   arrs = createArrs(generateSizesArr());  
+  results = executeArrs(arrs);
 }
 
 function generateSizesArr() {
