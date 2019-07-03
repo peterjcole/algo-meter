@@ -5,28 +5,28 @@
     <title>AlgoMeter</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   </head>
   <body>
     <div>    
-      <label for="function">Function name</label>
+      <label for="function">Function name:</label>
       <input id="function" type="text">
       <select id="type">
         <option value="array">Array function</option>
         <option value="global">Global function</option>
         <option value="algorithm">Algorithm function</option>
       </select>
-      <label for="secondArgument">Second argument (where applicable)</label>
+      <label for="secondArgument">Argument (optional):</label>
       <input id="secondArgument" type="text">      
       <button id="run" type="button">Run</button>
     </div>
-    <div id='charts'>
-        <canvas id="myChart"></canvas>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <div id='charts'>        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
         <script src="https://code.jquery.com/jquery-2.2.1.min.js"
         integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
         crossorigin="anonymous"></script>
         <script src="./chart.js"></script>
-    </div>
   </body>
 </html>

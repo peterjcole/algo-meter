@@ -1,4 +1,5 @@
 let chart = null
+let currentChartNum = 0
 
 $(document).ready(function() {
   getDataWithSpecificFn('sort', 'array', '');
@@ -17,7 +18,7 @@ function getData() {
   }).done(function(result){
     console.log(result)
     $('.myChart').empty()
-    renderChart(result, "sort")
+    renderChart(result, "sort", "array", undefined)
   })
 }
 
@@ -27,7 +28,7 @@ function getDataWithSpecificFn(fn, type, secondArgument) {
   }).done(function(result){
     console.log(result)
     $('.myChart').empty()
-    renderChart(result, fn)
+    renderChart(result, fn, type, secondArgument)
   })
 }
 
@@ -52,15 +53,16 @@ function getDataWithSpecificFn(fn, type, secondArgument) {
 // }
 
 function renderChart(result, fn, type, secondArgument) {
-  $('#myChart').remove(); // this is my <canvas> element
-  $('#charts').append('<canvas id="myChart"><canvas>');
-  var ctx = document.getElementById('myChart').getContext('2d');
+  // $('#myChart').remove(); // this is my <canvas> element
+  currentChartNum++
+  $('#charts').append(`<canvas id="chart${currentChartNum}"><canvas>`);
+  var ctx = document.getElementById(`chart${currentChartNum}`).getContext('2d');
   var chart = new Chart(ctx, {
       // The type of chart we want to create
       type: 'line',
       data: {
         datasets: [{
-          label: `Performance of ${type} function '${fn}' with ${secondArgument} argument`,
+          label: `Performance of ${type} function '${fn}' ${typeof(secondArgument) === 'undefined' || secondArgument === "" ? "" : `with argument of '${secondArgument}'`}`,
           backgroundColor: '#dc906b',
           data: result,
           fill: false,
