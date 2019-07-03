@@ -1,13 +1,25 @@
 const { performance } = require('perf_hooks')
+const algorithms = require('./algorithms')
 
-function runAlgoMeter(fn) {
-//   const arrs = createArrs(generateSizesArr(5000, 210000, 5000));  
+function runAlgoMeter(type, fn, secondArgument) {
   const arrs = createArrs(generateSizesArr(100000, 1000000, 100000));  
-
-  const results = executeTests(arrs, fn);
+  const results = executeTests(type, arrs, fn, secondArgument);
   return results.slice(0, (results.length - 2))
-
+//   const arrs = createArrs(generateSizesArr(5000, 210000, 5000));  
 }
+
+// function runArray(fn, secondArgument) {
+//   console.log(`running array: ${fn}, ${secondArgument}`)
+
+// }
+
+// function runStandard(fn, secondArgument) {
+//   // const arrs = createArrs(generateSizesArr(100000, 1000000, 100000));  
+//   console.log(`running standard: ${fn}, ${secondArgument}`)
+
+//   const results = executeTestsForStandardFunction(arrs, fn, secondArgument);
+//   return results.slice(0, (results.length - 2))
+// }
 
 function generateSizesArr(start, end, step) {
   let generatedSizesArr = []
@@ -44,12 +56,22 @@ function generateRandomString() {
   return result;
 }
 
-function executionTime(fn, obj){
+function executionTime(type, fn, obj, secondArgument){
   let results = []
   for(let i = 0; i < 20; i++) {
-    var t0 = performance.now();
-    obj[fn]() 
-    var t1 = performance.now();
+    if(type === 'array') {
+      var t0 = performance.now();
+      obj[fn](secondArgument) 
+      var t1 = performance.now();
+    } else if (type === 'global') {
+      // let f = new Function('obj', 'secondArgument', `${fn}(obj, secondArgument)`)
+      var t0 = performance.now();
+      global[fn](obj, secondArgument)
+    } else if (type === 'algorithm') {
+      var t0 = performance.now();
+      algorithms[fn](obj, secondArgument)
+      var t1 = performance.now();
+    }
     results.push(t1 - t0)
   }
   return arrMedian(results)
@@ -75,10 +97,10 @@ function arrMedian(arr) {
 
 }
 
-function executeTests(arrs, fn) {
+function executeTests(type, arrs, fn, secondArgument) {
   let results = []
   arrs.forEach(function(arr){
-    results.push({x: arr.length, y: executionTime(fn, arr)})
+    results.push({x: arr.length, y: executionTime(type, fn, arr, secondArgument)})
   })
   return results 
 }

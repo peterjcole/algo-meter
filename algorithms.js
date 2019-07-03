@@ -5,8 +5,8 @@ module.exports = {
       groups.push([])
     }
     let currentGroup = 0
-    console.log(groups)
-    console.log(groups[currentGroup])
+    // console.log(groups)
+    // console.log(groups[currentGroup])
     students.forEach(function(student, index) {
       groups[currentGroup].push(student)
       currentGroup >= numGroups - 1 ? currentGroup = 0 : currentGroup++

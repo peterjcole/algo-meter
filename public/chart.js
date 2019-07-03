@@ -1,11 +1,14 @@
 let chart = null
 
 $(document).ready(function() {
-  getData();
+  getDataWithSpecificFn('sort', 'array', '');
 })
 
 $('#run').click(function(){
-  getDataWithSpecificFn($('#function').val())
+  const fn = $('#function').val()
+  const type = $('#type').val()
+  const secondArgument = $('#secondArgument').val()
+  getDataWithSpecificFn(fn, type, secondArgument)
 })
 
 function getData() {
@@ -18,8 +21,8 @@ function getData() {
   })
 }
 
-function getDataWithSpecificFn(fn) {
-  $.get(`/run/function/${fn}`, function(data) {
+function getDataWithSpecificFn(fn, type, secondArgument) {
+  $.get(`/run/type/${type}/function/${fn}/secondArgument/${secondArgument}`, function(data) {
     $('.js-current-count').text(data.count);
   }).done(function(result){
     console.log(result)
@@ -28,8 +31,27 @@ function getDataWithSpecificFn(fn) {
   })
 }
 
+// function getDataForArrayFunction(fn, secondArgument) {
+//   $.get(`/run/function/${fn}/secondArgument/${secondArgument}`, function(data) {
+//     $('.js-current-count').text(data.count);
+//   }).done(function(result){
+//     console.log(result)
+//     $('.myChart').empty()
+//     renderChart(result, fn)
+//   })
+// }
 
-function renderChart(result, fn) {
+// function getDataForStandardFunction(fn, secondArgument) {
+//   $.get(`/runStandard/function/${fn}/secondArgument/${secondArgument}`, function(data) {
+//     $('.js-current-count').text(data.count);
+//   }).done(function(result){
+//     console.log(result)
+//     $('.myChart').empty()
+//     renderChart(result, fn)
+//   })
+// }
+
+function renderChart(result, fn, type, secondArgument) {
   $('#myChart').remove(); // this is my <canvas> element
   $('#charts').append('<canvas id="myChart"><canvas>');
   var ctx = document.getElementById('myChart').getContext('2d');
@@ -38,7 +60,7 @@ function renderChart(result, fn) {
       type: 'line',
       data: {
         datasets: [{
-          label: `Performance of '${fn}'`,
+          label: `Performance of ${type} function '${fn}' with ${secondArgument} argument`,
           backgroundColor: '#dc906b',
           data: result,
           fill: false,
@@ -71,17 +93,3 @@ function renderChart(result, fn) {
       }
   });
 }
-
-
-    // The data for our dataset
-    // data: {
-    //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    //     datasets: [{
-    //         label: 'My First dataset',
-    //         backgroundColor: 'rgb(255, 99, 132)',
-    //         borderColor: 'rgb(255, 99, 132)',
-    //         data: [0, 10, 5, 2, 20, 30, 45]
-    //     }]
-    // },
-
-    // Configuration options go here

@@ -9,7 +9,15 @@
   </head>
   <body>
     <div>    
+      <label for="function">Function name</label>
       <input id="function" type="text">
+      <select id="type">
+        <option value="array">Array function</option>
+        <option value="global">Global function</option>
+        <option value="algorithm">Algorithm function</option>
+      </select>
+      <label for="secondArgument">Second argument (where applicable)</label>
+      <input id="secondArgument" type="text">      
       <button id="run" type="button">Run</button>
     </div>
     <div id='charts'>
