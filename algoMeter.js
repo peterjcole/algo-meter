@@ -2,7 +2,9 @@ const { performance } = require('perf_hooks')
 const algorithms = require('./algorithms')
 
 function runAlgoMeter(type, fn, secondArgument) {
-  const arrs = createArrs(generateSizesArr(100000, 1000000, 100000));  
+  // const arrs = createArrs(generateSizesArr(100000, 1000000, 100000));  
+  const arrs = createArrs(generateSizesArr(1000, 10000, 100));  
+
   const results = executeTests(type, arrs, fn, secondArgument);
   return results.slice(0, (results.length - 2))
 //   const arrs = createArrs(generateSizesArr(5000, 210000, 5000));  
@@ -58,18 +60,20 @@ function generateRandomString() {
 
 function executionTime(type, fn, obj, secondArgument){
   let results = []
+  evalArgument = eval(secondArgument)
   for(let i = 0; i < 20; i++) {
     if(type === 'array') {
+      // console.log(`running ${fn} with argument of ${(evalArgument)}, of type ${typeof(evalArgument)}`)
       var t0 = performance.now();
-      obj[fn](secondArgument) 
+      obj[fn](evalArgument)
       var t1 = performance.now();
     } else if (type === 'global') {
-      // let f = new Function('obj', 'secondArgument', `${fn}(obj, secondArgument)`)
       var t0 = performance.now();
-      global[fn](obj, secondArgument)
+      global[fn](obj, evalArgument)
     } else if (type === 'algorithm') {
+      // console.log(`running ${fn} with argument of ${(evalArgument)}, of type ${typeof(evalArgument)}`)
       var t0 = performance.now();
-      algorithms[fn](obj, secondArgument)
+      algorithms[fn](obj, evalArgument)
       var t1 = performance.now();
     }
     results.push(t1 - t0)
