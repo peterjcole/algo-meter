@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
     "rewire": "^4.0.1"
   },
   "scripts": {

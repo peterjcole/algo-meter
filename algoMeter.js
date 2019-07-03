@@ -2,7 +2,7 @@ const { performance } = require('perf_hooks')
 
 function runAlgoMeter(fn) {
 //   const arrs = createArrs(generateSizesArr(5000, 210000, 5000));  
-  const arrs = createArrs(generateSizesArr(10000, 320000, 10000));  
+  const arrs = createArrs(generateSizesArr(100000, 1000000, 100000));  
 
   const results = executeTests(arrs, fn);
   return results.slice(0, (results.length - 2))
@@ -46,7 +46,7 @@ function generateRandomString() {
 
 function executionTime(fn, obj){
   let results = []
-  for(let i = 0; i < 30; i++) {
+  for(let i = 0; i < 20; i++) {
     var t0 = performance.now();
     obj[fn]() 
     var t1 = performance.now();
