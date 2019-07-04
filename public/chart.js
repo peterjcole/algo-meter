@@ -87,7 +87,7 @@ function renderChart(result, fn, type, secondArgument) {
            yAxes: [{
             scaleLabel: { 
               display: true,
-              labelString: 'Mean time to execute (ms)' 
+              labelString: 'Median time to execute (ms)' 
             }
           }]
         },

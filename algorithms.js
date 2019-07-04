@@ -5,8 +5,6 @@ module.exports = {
       groups.push([])
     }
     let currentGroup = 0
-    // console.log(groups)
-    // console.log(groups[currentGroup])
     students.forEach(function(student, index) {
       groups[currentGroup].push(student)
       currentGroup >= numGroups - 1 ? currentGroup = 0 : currentGroup++
@@ -26,6 +24,19 @@ module.exports = {
     return shuffled
   },
 
+  newShuffle: function(array) {
+    let output = [...array]
+    let last = array.length - 1
+    for(let i = 0; i < array.length; i++) {
+      let min = 0
+      let pos = Math.floor(Math.random() * (last - min + 1)) + min
+      let old = output[i]
+      output[i] = output[pos]
+      output[pos] = old
+    }
+    return output
+  },
+
   antoShuffle: function(array) {
     let output = [...array]
     let last = array.length - 1
@@ -38,10 +49,44 @@ module.exports = {
       output[last] = old
     }
     return output
-  }
+  },
 
+  reverse: function(array) {
+    output = []
+    array.forEach(function(item, index) {
+      output[array.length - 1 - index] = item
+    })
+    return output
+  },
 
+  // mechaCoach: function(array) {
+  //   let output = []
+  //   let doneGroups = {}
 
-  // make an array of positions
+  //   let possiblePairs = []
+  //   let usedPairs = {}
+  //   //make all possible pairs
+  //   for(let i = 0; i < array.length - 1; i++) {
+  //     for(let j = i + 1; j < array.length; j++) {
+  //       pair = [array[i], array[j]]
+  //       possiblePairs.push(pair)
+  //       usedPairs[pair] = false
+  //     }
+  //   }
 
+  //   console.log(possiblePairs)
+  //   let first = 0
+  //   let second = possiblePairs.length - 1
+
+  //   for (let i = 0; i < (possiblePairs.length / 2); i++) {
+  //     output.push([possiblePairs[first], possiblePairs[second]])
+  //     first += 1
+  //     second -= 1
+  //   }
+
+  //   console.log(output)
+  //   return output
+
+    
+  
 }
